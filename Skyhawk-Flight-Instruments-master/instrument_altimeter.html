@@ -1,0 +1,43 @@
+<!-- 
+Skyhawk Flight Instruments (https://github.com/uw-ray/Skyhawk-Flight-Instruments)
+By Raymond Blaga (raymond.blaga@gmail.com), Edward Hanna (edward.hanna@senecacollege.ca), Pavlo Kuzhel (pavlo.kuzhel@senecacollege.ca)
+
+Forked from jQuery Flight Indicators (https://github.com/sebmatton/jQuery-Flight-Indicators)
+By Sébastien Matton (seb_matton@hotmail.com)
+
+Published under GPLv3 License.
+-->
+
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<html lang="en" dir="ltr">
+  <head>
+    <title>Altimeter Indicator</title>
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/d3.min.js"></script>
+    <script src="js/jquery.flightindicators.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/flightindicators.css" />
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+  </head>
+
+  <body>
+    <div class="examples text-center">
+      <div>
+        <span id="altimeter"></span>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      var increment = 0;
+      var altimeter = $.flightIndicator("#altimeter", "altimeter");
+
+      const userAction = async () => {
+        const response = await fetch("http://127.0.0.1:5000/location");
+        const myJson = await response.json(); //extract JSON from the http response
+        altimeter.setAltitude(myJson.PLANE_ALTITUDE);
+      };
+      setInterval(userAction, 100);
+    </script>
+  </body>
+</html>

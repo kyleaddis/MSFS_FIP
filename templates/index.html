@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <script type="text/javascript" charset="utf-8">
+      const userAction = async () => {
+        const response = await fetch("http://127.0.0.1:5000/sixpack");
+        const myJson = await response.json(); //extract JSON from the http response
+        console.log(myJson);
+      };
+
+      setInterval(userAction, 1000);
+    </script>
+    <title>Session</title>
+  </head>
+  <body>
+    <p>Hello</p>
+  </body>
+</html>
